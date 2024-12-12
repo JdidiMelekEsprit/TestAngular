@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Admin Dashboard</h2>
+  
+    <div class="statistics">
+      <p>Total Users: {{ totalUsers }}</p>
+      <p>Available Announcements: {{ availableAnnouncements }}</p>
+    </div>
+  
+    <h3>Users List</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

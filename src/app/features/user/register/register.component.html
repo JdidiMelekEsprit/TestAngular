@@ -1,0 +1,71 @@
+<div class="container">
+  <form [formGroup]="formRegister" (ngSubmit)="save()">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="firstName">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('firstName')?.invalid && formRegister.get('firstName')?.touched">
+      <div *ngIf="formRegister.get('firstName')?.hasError('required')">This field is required</div>
+      <div *ngIf="formRegister.get('firstName')?.hasError('minlength')">Please give a valid name with at least 3 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('lastName')?.invalid && formRegister.get('lastName')?.touched">
+      <div *ngIf="formRegister.get('lastName')?.hasError('required')">This field is required</div>
+      <div *ngIf="formRegister.get('lastName')?.hasError('minlength')">Please give a valid name with at least 3 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" formControlName="username">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('username')?.invalid && formRegister.get('username')?.touched">
+      <div *ngIf="formRegister.get('username')?.hasError('required')">This field is required</div>
+      <div *ngIf="formRegister.get('username')?.hasError('minlength')">Username must be at least 5 characters long</div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('password')?.invalid && formRegister.get('password')?.touched">
+      <div *ngIf="formRegister.get('password')?.hasError('required')">This field is required</div>
+      <div *ngIf="formRegister.get('password')?.hasError('minlength')">Password must be at least 8 characters long</div>
+    </div>
+
+    <div formGroupName="address">
+      <div class="form-group">
+        <label>Street</label>
+        <input type="text" class="form-control" formControlName="street">
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input type="text" class="form-control" formControlName="city">
+      </div>
+      <div class="form-group">
+        <label>Zip Code</label>
+        <input type="text" class="form-control" formControlName="zipCode">
+      </div>
+    </div>
+
+    <div formArrayName="phoneNumbers">
+      <div class="form-group" *ngFor="let phone of phoneNumbers.controls; let i=index">
+        <label>Phone Number {{i + 1}}</label>
+        <input type="text" [formControlName]="i" class="form-control">
+        <button type="button" class="btn btn-warning" (click)="removePhoneNumber(i)">-</button>
+      </div>
+      <button type="button" class="btn btn-warning" (click)="addPhoneNumber()">+</button>
+    </div>
+
+    <br>
+    <button class="btn btn-success" type="submit" [disabled]="formRegister.invalid">Save</button>
+  </form>
+</div>
